@@ -1,6 +1,7 @@
 package cm.services;
 
 import java.util.List;
+import java.util.Random;
 
 
 import cm.dto.ClientDto;
@@ -14,6 +15,7 @@ import com.github.pagehelper.PageInfo;
 import cm.mapper.ClientMapper;
 import cm.pojo.Client;
 import cm.pojo.EasyUIResult;
+import org.springframework.util.StringUtils;
 
 
 /*顾客service
@@ -38,6 +40,10 @@ public class ClientService {
 				return "客户编号已经存在，请重新输入编号";
 			}*/
 			System.out.println(client);
+			if(StringUtils.isEmpty(client.getCno())){
+				String cno=System.currentTimeMillis()+"";
+				client.setCno(cno);
+			}
 			clientMapper.saveClient(client);
 			return "保存成功";
 			
@@ -64,11 +70,6 @@ public class ClientService {
 	public String modifyClient(Client client) {
 		// TODO Auto-generated method stub
 		Client queryClientBycno = queryClientBycno(client.getCno());
-		if (queryClientBycno != null) {
-			if (queryClientBycno.getCid() != client.getCid()){
-				return "这个客户编号已经存在，不能修改为这个编号";
-			}
-		}
 		clientMapper.modifyClient(client);
 		return "修改成功";
 	}
@@ -86,5 +87,4 @@ public class ClientService {
 		}
 		return "删除成功";
 	}
-
 }

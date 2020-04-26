@@ -68,7 +68,7 @@ function DCMclick(){
 // }
 // 删除顾客信息end
 // 删除经办人信息begin
-function DAMclick(){
+//function DAMclick(){
 /*		if(access.indexOf("信息删除功能") < 0 ){
             $.messager.alert('警告','该用户没有此功能');
             event.stopPropagation();	

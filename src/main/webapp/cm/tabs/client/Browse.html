@@ -1,4 +1,22 @@
 <!-- /* 浏览顾客信息*/ -->
+<script  type="text/javascript" src="./myjavascript/Detail.js"></script>
+<style type="text/css">
+    #SCMBrowercsymptomText textarea{
+        position:relative;
+        border:1px solid #D4D4D4;
+        background-color:#CCE8CF;
+        vertical-align:middle;
+        display:inline-block;
+        white-space:pre-wrap;
+        margin:0;
+        padding:0;
+        -moz-border-radius:5px 5px 5px 5px;
+        -webkit-border-radius:5px 5px 5px 5px;
+        border-radius:5px 5px 5px 5px;
+        font-size:13px;
+    }
+</style>
+
 <div style="margin: 0 0px 0px 0px">
     <div class="easyui-panel" title="患者信息查询"
          data-options="iconCls:'icon-user'" style="padding:10px 10px;text-align: center">
@@ -33,11 +51,10 @@
 
         </div>
     </div>
-        <div style="text-align: center">
+        <div align="center">
             <a href="javascript:clientQuery()" class="easyui-linkbutton" iconCls="icon-ok" style="width:100px;height: 40px;font-size: 20px">查询</a>
         </div>
     </div>
-</div>
      <table class="easyui-datagrid"  toolbar="#clienttoolbar"
      rownumbers="true" fitColumns="true" singleSelect="true"
      id="clientdatagrid" 
@@ -49,7 +66,7 @@
          style="width: 88%">
       <thead>
           <tr>
-            <th data-options="field:'cno'" width=9%>编号</th>
+            <th data-options="field:'cno',formatter:rowformater" width=9%>编号</th>
             <th data-options="field:'cname'" width=8%>姓名</th>
             <th data-options="field:'csex'" width=2%>性别</th>
              <th data-options="field:'cage'" width=3%>年龄</th>
@@ -67,78 +84,140 @@
           </tr>
       </thead>
   </table>
-  <div id="clienttoolbar">
+  <!--<div id="clienttoolbar">
         <a href="javascript:new2()" class="easyui-linkbutton" iconCls="icon-add" plain="true" 
         >查看详情</a>
-    </div>
+    </div>-->
 
 <!-- 隐藏页面显示顾客详情 -->
-<div class="easyui-dialog" title="顾客信息" id="SCMBrowerdialog" closed="true"
-data-options="iconCls:'icon-user',modal:true,draggable:false"
+<div class="easyui-dialog" title="患者详细信息" id="SCMBrowerdialog"
 style="width:1600px;height:600px">
+   <!-- <form id="clientform" method="post">
      <div style="margin:30px 0px 0px 100px;font-size: 40px">
       <div style="margin-bottom: 30px">
-        编号:<input id="SCMBrowercno" class="easyui-textbox"
-        style="width: 200px;height:40px"
+        编号:<input id="SCMBrowercno" name="cno" class="easyui-textbox"
+        style="width: 200px;height:40px;vertical-align: middle"
         data-options="disabled:true"></input>
         &nbsp;&nbsp;
         姓名:<input id="SCMBrowercname"
-        class="easyui-textbox"
-        style="width: 200px;height:40px"
+        class="easyui-textbox" name="cname"
+        style="width: 200px;height:40px;vertical-align: middle"
         data-options="disabled:true"></input>
         &nbsp;&nbsp;
-        性别:<input id="SCMBrowercsex"
-        class="easyui-textbox"
-        style="width: 40px;height:40px"
-        data-options="disabled:true"></input>
+        性别:<select  class="easyui-combobox" name="csex"  id="SCMBrowercsex"
+                   data-options="panelHeight:'auto'"
+                   style="width: 60px;height:40px;vertical-align: middle">
+              <option value="男">男</option>
+              <option value="女">女</option>
+          </select>
+
+
       </div>
       <div style="margin-bottom: 20px">
         年龄:<input id="SCMBrowercage"
-        class="easyui-textbox"
-        style="width: 200px;height:40px"
+        class="easyui-textbox" name="cage"
+        style="width: 200px;height:40px;vertical-align: middle"
         data-options="disabled:true"></input>
         &nbsp;&nbsp;
         电话:<input id="SCMBrowercphone"
-        class="easyui-textbox" 
-        style="width: 200px;height:40px"
+        class="easyui-textbox" name="cphone"
+        style="width: 200px;height:40px;vertical-align: middle"
         data-options="disabled:true"></input>
         &nbsp;&nbsp;
         经办人:<input id="SCMBrowerano"
-        class="easyui-textbox"
-        style="width: 150px;height:40px"
+        class="easyui-textbox" name="ano"
+        style="width: 150px;height:40px;vertical-align: middle"
         data-options="disabled:true"></input>
       </div>
     <div style="margin-bottom: 20px">
       录入日期:<input id="SCMBrowercdate"
-      class="easyui-textbox"
-      style="width: 150px;height:40px"
-      data-options="disabled:true"></input>
+      class="easyui-datebox" name="cdate"
+      style="width: 150px;height:40px;vertical-align: middle"></input>
       &nbsp;&nbsp;
       已购药品:<input id="SCMBrowermno"
-      class="easyui-textbox" 
-      style="width: 150px;height:40px"
+      class="easyui-textbox" name="mno"
+      style="width: 150px;height:40px;vertical-align: middle"
       data-options="disabled:true"></input>
     </div>
-    <!--<div style="margin-bottom: 30px;">-->
-      <!--住址:<input id="SCMBrowercaddress"-->
-      <!--class="easyui-textbox" -->
-      <!--style="width: 1150px;height:40px"-->
-      <!--data-options="disabled:true"></input></td>-->
-    <!--</div>-->
-    <div style="margin-bottom: 30px;">
-      症状:<input 
-      id="SCMBrowercsymptom" multiline="true"
-      class="easyui-textbox" 
-      style="width: 500px;height:150px"
-      data-options="disabled:true" >
-      </input>&nbsp;
-      备注:<input id="SCMBrowercremark" multiline="true"
-      class="easyui-textbox" style="width: 500px;height:150px"
-      data-options="disabled:true" ></input>
-    </div>     
+    &lt;!&ndash;<div style="margin-bottom: 30px;">&ndash;&gt;
+      &lt;!&ndash;住址:<input id="SCMBrowercaddress"&ndash;&gt;
+      &lt;!&ndash;class="easyui-textbox" &ndash;&gt;
+      &lt;!&ndash;style="width: 1150px;height:40px"&ndash;&gt;
+      &lt;!&ndash;data-options="disabled:true"></input></td>&ndash;&gt;
+    &lt;!&ndash;</div>&ndash;&gt;
+         <div style="margin-bottom: 30px;">
+             症状：<input  name="csymptom" id="SCMBrowercsymptom" multiline="true" class="easyui-textbox"
+                        style="width: 1000px;height:100px;white-space: pre-wrap" data-options="prompt:'长度小于1500'" />
+         </div>
+         <div style="margin-bottom: 30px;">
+             备注：<input  name="cremark" id="SCMBrowercremark" multiline="true" class="easyui-textbox"
+                     style="width: 1000px;height:150px"  data-options="prompt:'长度小于1500'" />
+         </div>
   </div>
+    </form>-->
+    <form id="clientform" method="post" >
+        <div style="margin:30px 0px 0px 20px;font-size: 20px">
+            <table>
+                <tr style="margin-bottom: 30px;height: 60px;">
+                    <td>
+                        编号：<input  name="cno" id="SCMBrowercno" class="easyui-textbox" style="width: 200px;height:40px" data-options="prompt:'长度小于10'"/>
+                        &nbsp;&nbsp;
+                    </td>
+                    <td>
+                        姓名：<input  name="cname"  id="SCMBrowercname" class="easyui-textbox" style="width: 200px;height:40px" data-options="prompt:'长度小于8'"/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                    </td>
+                    <td>
+                        性别：
+                        <select  class="easyui-combobox" id="SCMBrowercsex" name="csex" style="width: 200px;height:40px"  data-options="panelHeight:'auto'" style="width: 40px;height:40px">
+                            <option value="男">男</option>
+                            <option value="女">女</option>
+                        </select>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                    </td>
+                    <td>
+                        年龄：<input  name="cage" id="SCMBrowercage"
+                                   class="easyui-textbox"
+                                   style="width: 200px;height:40px"
+                                   data-options="prompt:'长度小于4'"/>
+                    </td>
+                </tr>
+                <tr style="margin-bottom: 30px;height: 60px;">
+                    <td>
+                        电话：<input  id="SCMBrowercphone" name="eccphone" class="easyui-textbox" style="width: 200px;height:40px" data-options="prompt:'长度小于20'"/>&nbsp;&nbsp;
+                    </td>
+                    <td>
+                        经办人：<select  class="easyui-combobox" id="SCMBrowerano" name="ano" style="width: 180px;height:40px"data-options="panelHeight:'auto'" >
+                        <option value="唐医生">唐医生</option>
+                        <option value="李医生">李医生</option>
+                    </select>
+                    </td>
+                    <td>
+                        日期：<input  name="cdate" id="SCMBrowercdate" class="easyui-datebox" style="width: 200px;height:40px"></input>&nbsp;&nbsp;
+                    </td>
+                    <td>
+                        已购药品：<input  name="mno"  id="SCMBrowermno" class="easyui-textbox" style="width: 200px;height:40px" data-options="prompt:'长度小于8'"/>
+                    </td>
+                </tr>
+            </table>
+
+            <div style="margin-bottom: 30px;">
+                症状：<!--<input  name="csymptom" id="SCMBrowercsymptom" multiline="true" class="easyui-textbox"
+                           style="width: 1000px;height:100px" data-options="prompt:'长度小于1500'" />-->
+                <textarea id="SCMBrowercsymptom" name="csymptom" style="width: 1000px;height:100px" data-options="prompt:'长度小于1500'"></textarea>
+            </div>
+            <div style="margin-bottom: 30px;">
+                备注：<textarea id="SCMBrowercremark" name="cremark" style="width: 1000px;height:100px" data-options="prompt:'长度小于1500'"></textarea>
+               <!-- <input  name="cremark" id="SCMBrowercremark" multiline="true" class="easyui-textbox"
+                        style="width: 1000px;height:150px"  data-options="prompt:'长度小于1500'" />-->
+            </div>
+        </div>
+    </form>
 </div>
 <script type="text/javascript">
+    function rowformater(value, row, index) {
+        return "<a href='javascript:clientDetailClick("+row.cno+")" + "' target='_self' "+ "onclick=$('#SCMBrowerdialog').dialog('open')"+" style='text-decoration:none;' hover='text-decoration:underline'>"+value+"</a>";//_top,
+    }
     function getClient(c){
       
           $.post("../Client/GetClient", {

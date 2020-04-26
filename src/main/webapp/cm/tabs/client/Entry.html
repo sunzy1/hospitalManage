@@ -1,4 +1,4 @@
-<!-- 录入顾客信息ECM -->
+<!-- 录入患者信息ECM -->
 
 <div style="margin:10px 0px 0px 50px">
     <div  style="width:1600px;height:600px">
@@ -40,7 +40,7 @@
                         </select>
                         </td>
                         <td>
-                            日期：<input  name="cdate" id="eccdate" class="easyui-datebox" style="width: 200px;height:40px" data-options="prompt:'必填'"></input>&nbsp;&nbsp;
+                            日期：<input  name="cdate" id="eccdate" class="easyui-datebox" style="width: 200px;height:40px"></input>&nbsp;&nbsp;
                         </td>
                         <!--<td>
                             已购药品：<input  name="mno"  id="ecmno" class="easyui-textbox" style="width: 200px;height:40px" data-options="prompt:'长度小于8'"/>
@@ -71,11 +71,6 @@
 <!-- 测试完成 -->
 <script type="text/javascript">
   function ECMclickEntry() {
-
-    /*if($("#eccno").val().length>10||$("#eccno").val().length==0) {
-        $.messager.alert('提示', '编号不能长度大于10且不为空'); 
-        return ;
-    }*/
     if($("#eccname").val().length>8) {
         $.messager.alert('提示', '姓名不能长度大于8'); 
         return ;
@@ -104,7 +99,7 @@
           return ;
       }*/
     
-    if($("#eccsymptom").val().length>50) {
+    if($("#eccsymptom").val().length>1500) {
         $.messager.alert('提示', '症状不能长度大于1500');
         return ;
     }

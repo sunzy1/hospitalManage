@@ -10,6 +10,7 @@ public class Medicine {
 	private String mname;
 	private String mmode;
 	private String mefficacy;
+	private String mremark;
 
 	public int getMid() {
 		return mid;
@@ -51,9 +52,17 @@ public class Medicine {
 		this.mefficacy = mefficacy;
 	}
 
+	public String getMremark() {
+		return mremark;
+	}
+
+	public void setMremark(String mremark) {
+		this.mremark = mremark;
+	}
+
 	@Override
 	public String toString() {
-		return "Medicine [mno=" + mno + ", mname=" + mname + ", mmode=" + mmode + ", mefficacy=" + mefficacy + "]";
+		return "Medicine [mno=" + mno + ", mname=" + mname + ", mmode=" + mmode + ", mefficacy=" + mefficacy+"mremark"+ mremark+ "]";
 	}
 
 }

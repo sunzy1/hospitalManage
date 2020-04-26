@@ -1,27 +1,92 @@
 <!-- /* 浏览药品信息*/ -->
-     <table class="easyui-datagrid" 
-         data-options="striped:true,
+<script  type="text/javascript" src="./myjavascript/Detail.js"></script>
+<div style="margin: 0 0px 0px 0px">
+    <div class="easyui-panel" title="药方信息查询"
+         data-options="iconCls:'icon-user'" style="padding:10px 10px;text-align: center">
+        <div id="clientDiv" >
+            <div id="client1">
+                <label>药方编号：</label>
+                <input id="prescriptionNo" class="easyui-textbox"
+                       style="height: 30px"
+                       data-options="prompt:'请输入药方编号...'">
+                <label>药方名称：</label>
+                <input id="prescriptionCode" class="easyui-textbox"
+                       labelPosition="top"
+                       style="height: 30px;width: 200px"
+                       data-options="prompt:'请输入药方名称...'">
+                <label style="margin-left: 20px;">录入开始日期：</label>
+                <input id="prescriptionStartDate" class="easyui-datebox" style="width: 100px;height:30px">
+                <label style="margin-left: 20px;">录入结束日期：</label>
+                <input id="prescriptionEndDate" class="easyui-datebox" style="width: 100px;height:30px">
+            </div>
+        </div>
+    </div>
+    <div style="text-align: center">
+        <a href="javascript:prescriptionQuery()" class="easyui-linkbutton" iconCls="icon-ok" style="width:100px;height: 40px;font-size: 20px">查询</a>
+    </div>
+</div>
+     <table class="easyui-datagrid"
+            id="medicineid"
+            data-options="striped:true,
          pagination:true,
-         
-         
          url:'../Medicine/GetMessage',pageSize:5,
          pageList:[2,5,10]"
          style="width: 88%">
       <thead>
           <tr>
-            
 
-            
-            <th data-options="field:'mno'" width=12%>
-            编号</th>
-              <th data-options="field:'mname'" width=43%>
-              名称</th>
-              <th data-options="field:'mmode'" width=2%>
+            <th data-options="field:'mno',formatter:rowformater" width=20%>
+            药方编号</th>
+              <th data-options="field:'mname'" width=60%>
+              药方名称</th>
+              <th data-options="field:'mmode'" width=10%>
               服用方法</th>
-              <th data-options="field:'mefficacy'" width=44%>
-              功效</th>
-              
-
+              <!--<th data-options="field:'mefficacy'" width=44%>
+              功效</th>-->
           </tr>
       </thead>
   </table>
+<div id="medicineDetail" class="easyui-dialog" title="药方详情页面" >
+    <form id="medicineform" method="post">
+        <div style="margin-bottom: 30px">
+            药品编号:<input readonly name="mno" id="emmno"
+                       class="easyui-textbox"
+                       style="width: 200px;height:40px"
+                       data-options=""></input>
+            &nbsp;
+            服用方法:<select  class="easyui-combobox" name="mmode"  id="emmmode"
+                          data-options="panelHeight:'auto'"
+                          style="width: 80px;height:40px">
+            <option value="内服">内服</option>
+            <option value="外用">外用</option>
+        </select>
+            &nbsp;&nbsp;病症名称:<input  name="mname" id="emname"
+                                     class="easyui-textbox"
+                                     style="width: 200px;height:40px"
+                                     data-options="prompt:'请输入病症名称...'"></input>
+        </div>
+        <div style="margin-bottom: 30px;">
+            <!--detailedContent-->
+            详细内容:<textarea id="detailedContent" rows="50" cols="10" class="ckeditor" name="detailedContent">
+                </textarea>
+            <input hidden name="mefficacy" id="emmefficacy"/>
+        </div>
+        <div style="margin-bottom: 30px">
+            备注:
+            <!--diseaseContent-->
+            <textarea  id="diseaseRemark" rows="50" cols="10" class="ckeditor" name="diseaseRemark">
+                     </textarea>
+            <input hidden name="mremark" id="emremark"/>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+    CKEDITOR.replace( 'diseaseRemark' );
+    CKEDITOR.replace( 'detailedContent' );
+</script>
+</div>
+<script type="text/javascript">
+    function rowformater(value, row, index) {
+        return "<a href='javascript:prescriptionClick("+row.mno+")" + "' target='_self' "+ "onclick=$('#medicineDetail').dialog('open')"+" style='text-decoration:none;' hover='text-decoration:underline'>"+value+"</a>";//_top,
+    }
+</script>

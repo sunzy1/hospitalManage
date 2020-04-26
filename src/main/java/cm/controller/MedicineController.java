@@ -2,10 +2,14 @@ package cm.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import cm.dto.MedicineDto;
+import com.alibaba.fastjson.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -91,8 +95,13 @@ public class MedicineController {
 	@RequestMapping("GetMessage")
 	@ResponseBody
 	public EasyUIResult queryAllMedicine(@RequestParam(value = "page", defaultValue = "1") Integer page,
-			@RequestParam(value = "rows", defaultValue = "5") Integer rows) {
-		return medicineService.queryAllMedicine(page, rows);
+			@RequestParam(value = "rows", defaultValue = "5") Integer rows,HttpServletRequest request) {
+		String str_medicineDto =  request.getParameter("medicineDto");
+		MedicineDto medicineDto = null;
+		if(!StringUtils.isEmpty(str_medicineDto)){
+			medicineDto = JSON.parseObject(str_medicineDto,MedicineDto.class);
+		}
+		return medicineService.queryAllMedicine(page, rows,medicineDto);
 
 	}
 

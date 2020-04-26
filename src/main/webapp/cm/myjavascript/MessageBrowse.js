@@ -6,16 +6,16 @@ function BCMclick(){
             $.messager.alert('警告','该用户没有此功能');
             event.stopPropagation();	
          }
-    	if(!$('#output').tabs('exists','浏览顾客信息')) {
+    	if(!$('#output').tabs('exists','浏览患者信息')) {
 				     $('#output').tabs('add',{ 
-					    title:'浏览顾客信息',
+					    title:'浏览患者信息',
 					    href:'./tabs/client/Browse.html',
 					    closable:true
 					});
 				 }
 		else
 		{
-		$('#output').tabs('select', '浏览顾客信息');
+		$('#output').tabs('select', '浏览患者信息');
 		}
 }
 // 浏览顾客信息end
@@ -74,5 +74,19 @@ function clientQuery() {
     $('#clientdatagrid').datagrid('load',{
         "clientDto":JSON.stringify(clientDto)
     });
-
 }
+	function prescriptionQuery(){
+		var mno=$("#prescriptionNo").textbox('getValue');
+		var mname=$("#prescriptionCode").textbox('getValue');
+		var startDate=$("#prescriptionStartDate").textbox('getValue');
+		var endDate=$("#prescriptionEndDate").textbox('getValue');
+		var medicineDto = new Object();
+		medicineDto.mno=mno;
+		medicineDto.mname=mname;
+		medicineDto.startDate=startDate;
+		medicineDto.endDate=endDate;
+		$('#medicineid').datagrid('load',{
+			"medicineDto":JSON.stringify(medicineDto)
+		});
+	}
+

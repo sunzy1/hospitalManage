@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import cm.dto.MedicineDto;
 import org.omg.CORBA.PRIVATE_MEMBER;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,10 +31,10 @@ public class MedicineService {
 
 	}
 
-	public EasyUIResult queryAllMedicine(Integer page, Integer rows) {
+	public EasyUIResult queryAllMedicine(Integer page, Integer rows, MedicineDto medicineDto) {
 		// TODO Auto-generated method stub
 		PageHelper.startPage(page, rows);
-		List<Medicine> medicines = medicineMapper.queryAllMedicine();
+		List<Medicine> medicines = medicineMapper.queryAllMedicine(medicineDto);
 		PageInfo<Medicine> pageInfo = new PageInfo<Medicine>(medicines);
 		return new EasyUIResult(pageInfo.getTotal(), medicines);
 	}
@@ -61,11 +62,11 @@ public class MedicineService {
 	public String modifyMedicine(Medicine medicine) {
 		// TODO Auto-generated method stub
 		Medicine queryMedicineByMno = queryMedicineByMno(medicine.getMno());
-		if (queryMedicineByMno != null) {
-			if (queryMedicineByMno.getMid() != medicine.getMid())
-				return "这个药品编号已经存在，不能修改为这个编号";
+		if (queryMedicineByMno == null) {
+				return "这个药品编号数据库不存在，无法更改！可能是页面修改药品编号导致的！";
 		}
 		try {
+            medicine.setMid(queryMedicineByMno.getMid());
 			medicineMapper.modifyMedicine(medicine);
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -76,7 +77,8 @@ public class MedicineService {
 
 	public List<Medicine> getAllMedicine() {
 		// TODO Auto-generated method stub
-		List<Medicine> queryAllMedicine = medicineMapper.queryAllMedicine();
+		MedicineDto dto =new MedicineDto();
+		List<Medicine> queryAllMedicine = medicineMapper.queryAllMedicine(dto);
 		return queryAllMedicine;
 	}
 

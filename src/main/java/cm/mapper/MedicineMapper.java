@@ -2,12 +2,13 @@ package cm.mapper;
 
 import java.util.List;
 
+import cm.dto.MedicineDto;
 import cm.pojo.Medicine;
 
 public interface MedicineMapper {
 	public Medicine queryMedicineByMno(String mno);
 
-	public List<Medicine> queryAllMedicine();
+	public List<Medicine> queryAllMedicine(MedicineDto medicineDto);
 
 	public void saveMedicine(Medicine medicine);
 
