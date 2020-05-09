@@ -2,6 +2,7 @@ package cm.controller;
 
 import cm.dto.ClientDto;
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
@@ -17,6 +18,7 @@ import cm.pojo.EasyUIResult;
 import cm.services.ClientService;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @RequestMapping("Client")
 @Controller
@@ -35,10 +37,10 @@ public class ClientController {
 	}
 
 	// 按编号删除
-	@RequestMapping("DeleteClient")
+	@RequestMapping(value="DeleteClient", produces = "text/html;charset=UTF-8")
 	@ResponseBody
-	public void deleteClientBycno(String cno) {
-		clientService.deleteClientBycno(cno);
+	public String deleteClientBycno(String cno) {
+		return clientService.deleteClientBycno(cno);
 	}
 //	批量删除
 	@RequestMapping(value = "DeleteRows", produces = "text/html;charset=UTF-8")
@@ -90,5 +92,11 @@ public class ClientController {
 	@ResponseBody
 	public String modifyClient(Client client) {
 		return clientService.modifyClient(client);
+	}
+	// 修改客户信息
+	@RequestMapping(value = "exportClient", produces = "text/html;charset=UTF-8")
+	public void exportClient(String data,HttpServletResponse response) {
+        ClientDto dto=JSONObject.parseObject(data,ClientDto.class);
+        clientService.exportClient(dto,response);
 	}
 }

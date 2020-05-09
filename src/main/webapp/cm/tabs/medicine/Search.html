@@ -52,9 +52,9 @@ style="width:1000px;height:600px;">
     $.post("../Medicine/QueryMedicineByMno", {
         mno: $('#SMMId').textbox('getValue')
     }, function(data) {
-        if (data == ''){
+        if (data == '') {
             $.messager.alert('警告', '编号无效');
-            return ;
+            return;
         }
         $('#SMMdialog').dialog('open');
         $("#SMMmno").textbox('setValue', data.mno);
@@ -82,7 +82,6 @@ style="width:1000px;height:600px;">
     //    $('#MultiSMMdialog').dialog('open');
         
     // });
-}
 </script>
 
 <!-- 多条件查询页面 -->
@@ -119,7 +118,7 @@ style="width:1000px;height:600px;">
 </div>
 </div>
 </div>
-<!-- 多条件查询end -->
+<-- 多条件查询end -->
 
 <!-- 隐藏页面-多条件查询结果 -->
 <!-- <div  title="药品信息" closed="true" id="MultiSMMdialog" 

@@ -20,9 +20,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         </if>
         
 	</select>
-	<update id="modifyMedicine"  parameterType="Medicine">
+	<update id="modifyMedicine"  parameterType="cm.dto.MedicineDto">
 		update medicine set mno=#{mno},mname=#{mname},mmode=#{mmode},
-		mefficacy=#{mefficacy},mremark= #{mremark} where mid=#{mid}
+		mefficacy=#{mefficacy},mremark= #{mremark},mdate=#{mdate} where mid=#{mid}
 	</update>
 	<delete id="deleteMedicineByMno" parameterType="String" >
 		DELETE FROM medicine WHERE mno = #{mno}
@@ -35,16 +35,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="null!=mname and ''!=mname">
 			and mname like "%"#{mname}"%"
 		</if>
-		<!--<if test="null!=startDate">
+		<if test="null!=startDate">
 			and mdate &gt;= #{startDate,jdbcType=TIMESTAMP}
 		</if>
 		<if test="null!=endDate">
 			and mdate  &lt; #{endDate,jdbcType=TIMESTAMP}
-		</if>-->
+		</if>
 	</select>
-	<insert id="saveMedicine" parameterType="Medicine">
-		insert into medicine(mno,mname,mmode,mefficacy,mremark) VALUES
-		(#{mno},#{mname},#{mmode},#{mefficacy},#{mremark})
+	<insert id="saveMedicine" parameterType="cm.dto.MedicineDto">
+		insert into medicine(mno,mname,mmode,mefficacy,mremark,mdate) VALUES
+		(#{mno},#{mname},#{mmode},#{mefficacy},#{mremark},#{mdate})
 	</insert>
 	
 </mapper>

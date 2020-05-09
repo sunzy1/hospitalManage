@@ -13,7 +13,7 @@ public class Client {
 	// 已购药品mno：char(12)
 	// 经办人ano：char(8)
 	// 录入日期cdate：datetime(8)
-	// 备注cremark：nvarchar(50)
+	// 备注cremark：nvarchar(50)字段作为药方信息使用
 	private int cid;
 	private String cno;
 	private String cname;

@@ -1,0 +1,12 @@
+Tomcat、JDK、war包在工具包文件夹下
+Tomcat日志乱码，控制台自动消失已经解决，直接使用tmcat解压缩，将war包放入即可
+为使用方便可执行第四步发送到桌面，更换图标
+
+1.使用IDEA导出war包
+2.将war包放入Tomcat的webapps目录下
+3.打开bin\setclasspath.bat文件，将set _RUNJAVA="%JRE_HOME%\bin\java.exe" 
+修改为set _RUNJAVA="%JRE_HOME%\bin\javaw.exe"这时再启动tomcat就不会弹出黑色控制台了
+4.将bin\startUp.bat发送到桌面快捷方式并修改名称为启动，bin\shutDown.bat改为关闭药店管理系统，右键图标-属性更换
+为便于识别的图标更换为便于识别的图标
+5.双击桌面快捷方式启动tomcat
+http://localhost:8080/CM/login.html

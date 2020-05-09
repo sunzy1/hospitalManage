@@ -66,18 +66,20 @@ function clientQuery() {
     var SCMDisease=$("#SCMDisease").textbox('getValue');
     var SCMStartDate=$("#SCMStartDate").textbox('getValue');
     var SCMEndDate=$("#SCMEndDate").textbox('getValue');
+    var SCMRemark = $("#SCMRemark").textbox('getValue');
     var clientDto = new Object();
     clientDto.cname=SCMName;
     clientDto.csymptom=SCMDisease;
     clientDto.startDate=SCMStartDate;
     clientDto.endDate=SCMEndDate;
+	clientDto.cremark=SCMRemark;
     $('#clientdatagrid').datagrid('load',{
         "clientDto":JSON.stringify(clientDto)
     });
 }
 	function prescriptionQuery(){
 		var mno=$("#prescriptionNo").textbox('getValue');
-		var mname=$("#prescriptionCode").textbox('getValue');
+		var mname=$("#prescriptionName").textbox('getValue');
 		var startDate=$("#prescriptionStartDate").textbox('getValue');
 		var endDate=$("#prescriptionEndDate").textbox('getValue');
 		var medicineDto = new Object();
@@ -89,4 +91,38 @@ function clientQuery() {
 			"medicineDto":JSON.stringify(medicineDto)
 		});
 	}
+function clientExport() {
+	var SCMName=$("#SCMName").textbox('getValue');
+	var SCMDisease=$("#SCMDisease").textbox('getValue');
+	var SCMStartDate=$("#SCMStartDate").textbox('getValue');
+	var SCMEndDate=$("#SCMEndDate").textbox('getValue');
+	var SCMRemark = $("#SCMRemark").textbox('getValue');
+	var clientDto = new Object();
+	clientDto.cname=SCMName;
+	clientDto.csymptom=SCMDisease;
+	clientDto.startDate=SCMStartDate;
+	clientDto.endDate=SCMEndDate;
+	clientDto.cremark=SCMRemark;
+	//?clientDto="+JSON.stringify(clientDto)
+	var path="../Client/exportClient?data="+escape(JSON.stringify(clientDto));
+	window.location.href=path;
+	/*$.post('../Client/exportClient',{
+		"clientDto":JSON.stringify(clientDto)
+	},function (data) {
 
+	});*/
+}
+
+function prescriptionExport() {
+    var mno=$("#prescriptionNo").textbox('getValue');
+    var mname=$("#prescriptionName").textbox('getValue');
+    var startDate=$("#prescriptionStartDate").textbox('getValue');
+    var endDate=$("#prescriptionEndDate").textbox('getValue');
+    var medicineDto = new Object();
+    medicineDto.mno=mno;
+    medicineDto.mname=mname;
+    medicineDto.startDate=startDate;
+    medicineDto.endDate=endDate;
+    var path="../Medicine/exportMedicine?data="+escape(JSON.stringify(medicineDto));
+    window.location.href=path;
+}

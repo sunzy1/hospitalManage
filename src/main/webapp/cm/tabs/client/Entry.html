@@ -1,15 +1,22 @@
 <!-- 录入患者信息ECM -->
-
+<script type="text/javascript">
+    $(function(){
+        //时间戳
+        var random_date=new Date().getTime();
+        $("#eccno").val(random_date);
+        $("#eccno").attr("readonly","readonly");
+    });
+</script>
 <div style="margin:10px 0px 0px 50px">
     <div  style="width:1600px;height:600px">
       <form id="ECMform" method="post" >  
         <div style="margin:30px 0px 0px 20px;font-size: 20px">
                 <table>
                     <tr style="margin-bottom: 30px;height: 60px;">
-                        <!--<td>
+                        <td>
                             编号：<input  name="cno" id="eccno" class="easyui-textbox" style="width: 200px;height:40px" data-options="prompt:'长度小于10'"/>
                             &nbsp;&nbsp;
-                        </td>-->
+                        </td>
                         <td>
                             姓名：<input  name="cname"  id="eccname" class="easyui-textbox" style="width: 200px;height:40px" data-options="prompt:'长度小于8'"/>
                             &nbsp;&nbsp;&nbsp;&nbsp;
@@ -40,7 +47,7 @@
                         </select>
                         </td>
                         <td>
-                            日期：<input  name="cdate" id="eccdate" class="easyui-datebox" style="width: 200px;height:40px"></input>&nbsp;&nbsp;
+                            日期：<input  name="cdate" id="eccdate" class="easyui-datebox" style="width: 200px;height:40px" value="true"/>&nbsp;&nbsp;
                         </td>
                         <!--<td>
                             已购药品：<input  name="mno"  id="ecmno" class="easyui-textbox" style="width: 200px;height:40px" data-options="prompt:'长度小于8'"/>
@@ -50,12 +57,12 @@
 
             <div style="margin-bottom: 30px;">
                 症状：<input  name="csymptom" id="eccsymptom" multiline="true" class="easyui-textbox"
-                style="width: 1000px;height:100px" data-options="prompt:'长度小于1500'" />
+                style="width: 1000px;height:100px;font-size: 15px" data-options="prompt:'长度小于1500'" />
             </div>
             <div style="margin-bottom: 30px;">
-                备注：
+                药方：
                 <input  name="cremark" id="eccremark" multiline="true" class="easyui-textbox"
-                style="width: 1000px;height:150px"  data-options="prompt:'长度小于1500'" />
+                style="width: 1000px;height:150px;font-size: 15px"  data-options="prompt:'长度小于1500'" />
             </div>
           </div>
         </form>
@@ -115,7 +122,8 @@
                 },    
                 success:function(data){    
                     // alert("aSome");
-                    $.messager.alert('提示', data); 
+                    $.messager.alert('提示', data);
+                    window.parent.close("录入患者信息");
                 }    
             });    
             // submit the form    

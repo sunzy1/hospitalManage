@@ -10,7 +10,7 @@
                        style="height: 30px"
                        data-options="prompt:'请输入药方编号...'">
                 <label>药方名称：</label>
-                <input id="prescriptionCode" class="easyui-textbox"
+                <input id="prescriptionName" class="easyui-textbox"
                        labelPosition="top"
                        style="height: 30px;width: 200px"
                        data-options="prompt:'请输入药方名称...'">
@@ -24,6 +24,9 @@
     <div style="text-align: center">
         <a href="javascript:prescriptionQuery()" class="easyui-linkbutton" iconCls="icon-ok" style="width:100px;height: 40px;font-size: 20px">查询</a>
     </div>
+    <div align="left">
+        <a href="javascript:prescriptionExport()" class="easyui-linkbutton" iconCls="icon-add" style="width:100px;height: 20px;font-size: 20px">导出</a>
+    </div>
 </div>
      <table class="easyui-datagrid"
             id="medicineid"
@@ -31,24 +34,20 @@
          pagination:true,
          url:'../Medicine/GetMessage',pageSize:5,
          pageList:[2,5,10]"
-         style="width: 88%">
+         style="width: 88%;">
       <thead>
           <tr>
-
-            <th data-options="field:'mno',formatter:rowformater" width=20%>
-            药方编号</th>
-              <th data-options="field:'mname'" width=60%>
-              药方名称</th>
-              <th data-options="field:'mmode'" width=10%>
-              服用方法</th>
-              <!--<th data-options="field:'mefficacy'" width=44%>
-              功效</th>-->
+            <th data-options="field:'mno',formatter:rowformater" width=10%>药方编号</th>
+            <th data-options="field:'mname'" width=20% > 药方名称</th>
+            <th data-options="field:'mmode'" width=5% >服用方法</th>
+            <!--<th data-options="field:'mefficacy'" width=44% height="30px">功效</th>-->
+            <th data-options="field:'mdate'" width=10% >录入日期</th>
           </tr>
       </thead>
   </table>
 <div id="medicineDetail" class="easyui-dialog" title="药方详情页面" >
     <form id="medicineform" method="post">
-        <div style="margin-bottom: 30px">
+        <div>
             药品编号:<input readonly name="mno" id="emmno"
                        class="easyui-textbox"
                        style="width: 200px;height:40px"
@@ -60,10 +59,10 @@
             <option value="内服">内服</option>
             <option value="外用">外用</option>
         </select>
-            &nbsp;&nbsp;病症名称:<input  name="mname" id="emname"
+            &nbsp;&nbsp;药方名称:<input  name="mname" id="emname"
                                      class="easyui-textbox"
                                      style="width: 200px;height:40px"
-                                     data-options="prompt:'请输入病症名称...'"></input>
+                                     data-options="prompt:'请输入药方名称...'"></input>
         </div>
         <div style="margin-bottom: 30px;">
             <!--detailedContent-->

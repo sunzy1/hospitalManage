@@ -8,7 +8,7 @@
     });
 </script>
 <div style="margin:10px 0px 0px 50px">
-    <div class="easyui-panel" title="药品信息" 
+    <div class="easyui-panel" title="药方信息"
     data-options="iconCls:'icon-pill_add'"
     style="width:1400px;height:600px;">
         <div style="margin:50px 0px 0px 100px;font-size: 20px">
@@ -25,10 +25,12 @@
                       <option value="内服">内服</option>
                       <option value="外用">外用</option>
                     </select>
-                    &nbsp;&nbsp;病症名称:<input  name="mname" id="emname"
+                    &nbsp;&nbsp;药方名称:<input  name="mname" id="emname"
                                         class="easyui-textbox"
                                         style="width: 200px;height:40px"
-                                        data-options="prompt:'请输入病症名称...'"></input>
+                                        data-options="prompt:'请输入药方名称...'"/>
+                    &nbsp;&nbsp; 日期：<input  name="mdate" id="emdate" class="easyui-datebox" style="width: 200px;height:40px" value="true"/>&nbsp;&nbsp;
+
                 </div>
 
                 <div style="margin-bottom: 30px;">

@@ -3,10 +3,13 @@ package cm.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import cm.dto.ClientDto;
 import cm.dto.MedicineDto;
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
@@ -54,15 +57,12 @@ public class MedicineController {
 	 * 
 	 * }
 	 */
-	/*
-	 * // 通过mno删除药品信息
-	 * 
-	 * @RequestMapping(value = "DeleteMedicine", produces =
-	 * "text/html;charset=UTF-8")
-	 * 
-	 * @ResponseBody public String deleteMedicineByMno(String mno) { return
-	 * medicineService.deleteMedicineByMno(mno); }
-	 */
+
+	 // 通过mno删除药品信息
+	  @RequestMapping(value = "DeleteMedicine", produces = "text/html;charset=UTF-8")
+	  @ResponseBody public String deleteMedicineByMno(String mno) { return
+	  medicineService.deleteMedicineByMno(mno); }
+
 	// 批量删除
 	@RequestMapping(value = "DeleteRows", produces = "text/html;charset=UTF-8")
 	@ResponseBody
@@ -80,15 +80,15 @@ public class MedicineController {
 	// 保存药品信息
 	@RequestMapping(value = "SaveMedicine", produces = "text/html;charset=UTF-8")
 	@ResponseBody
-	public String saveMedicine(Medicine medicine) {
-		return medicineService.saveMedicine(medicine);
+	public String saveMedicine(MedicineDto medicineDto) {
+		return medicineService.saveMedicine(medicineDto);
 	}
 
 	// 修改药品信息
 	@RequestMapping(value = "ModifyMedicine", produces = "text/html;charset=UTF-8")
 	@ResponseBody
-	public String modifyMedicine(Medicine medicine) {
-		return medicineService.modifyMedicine(medicine);
+	public String modifyMedicine(MedicineDto medicineDto) {
+		return medicineService.modifyMedicine(medicineDto);
 	}
 
 	// easyui返回json
@@ -111,6 +111,11 @@ public class MedicineController {
 	public List<Medicine> getAllMedicine() {
 		List<Medicine> allMedicine = medicineService.getAllMedicine();
 		return allMedicine;
-
+	}
+	// 修改药品信息
+	@RequestMapping(value = "exportMedicine", produces = "text/html;charset=UTF-8")
+	public void exportMedicine(String data, HttpServletResponse response) {
+		MedicineDto medicineDto= JSONObject.parseObject(data,MedicineDto.class);
+		 medicineService.exportMedicine(medicineDto,response);
 	}
 }

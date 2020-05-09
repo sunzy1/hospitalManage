@@ -10,11 +10,11 @@ public interface MedicineMapper {
 
 	public List<Medicine> queryAllMedicine(MedicineDto medicineDto);
 
-	public void saveMedicine(Medicine medicine);
+	public void saveMedicine(MedicineDto medicineDto);
 
 	public void deleteMedicineByMno(String mno);
 
-	public void modifyMedicine(Medicine medicine);
+	public void modifyMedicine(MedicineDto medicineDto);
 
 	public List<Medicine> queryMultiMedicine(Medicine medicine);
 }

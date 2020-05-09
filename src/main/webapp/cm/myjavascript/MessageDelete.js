@@ -1,6 +1,6 @@
 // 信息删除begin
 // <!-- 信息删除-DCM-DUM-DMM+MessageDelete  -->
-// 删除顾客信息begin
+// 删除患者信息begin
 function DCMclick(){
 		if(access.indexOf("信息删除功能") < 0 ){
             $.messager.alert('警告','该用户没有此功能');

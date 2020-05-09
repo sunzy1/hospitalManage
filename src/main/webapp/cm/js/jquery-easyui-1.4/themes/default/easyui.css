@@ -123,14 +123,14 @@
 .panel-body {
   background-color: #f2f5f7;
   color: #000000;
-  font-size: 12px;
+  font-size: 15px;
 }
 .panel-title {
-  font-size: 12px;
+  font-size: 15px;
   font-weight: bold;
   color: #2779AA;
-  height: 16px;
-  line-height: 16px;
+  height: 18px;
+  line-height: 18px;
 }
 .panel-footer {
   border: 1px solid #AED0EA;
@@ -610,8 +610,8 @@
   display: inline-block;
   vertical-align: top;
   width: auto;
-  line-height: 24px;
-  font-size: 12px;
+  line-height: 25px;
+  font-size: 18px;
   padding: 0;
   margin: 0 4px;
 }

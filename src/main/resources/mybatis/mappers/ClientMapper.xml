@@ -31,10 +31,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			and csymptom like "%"#{csymptom}"%"
 		</if>
 		<if test="null!=startDate">
-			and cdate &gt;= #{startDate,jdbcType=TIMESTAMP}
+			and cdate &gt; #{startDate,jdbcType=TIMESTAMP}
 		</if>
 		<if test="null!=endDate">
-			and cdate  &lt; #{endDate,jdbcType=TIMESTAMP}
+			and cdate  &lt;= #{endDate,jdbcType=TIMESTAMP}
 		</if>
 	</select>
 	<select id="saveClient" parameterType="Client" >

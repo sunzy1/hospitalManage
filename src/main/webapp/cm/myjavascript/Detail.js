@@ -1,8 +1,8 @@
 
 $(function(){
     $("#medicineDetail").dialog({
-        width:1700,
-        height:800,
+        width:1300,
+        height:680,
         modal:true,
         closed:true,
         buttons:[
@@ -12,6 +12,18 @@ $(function(){
                 handler:function(){
                     medicineModify();
                     $("#medicineDetail").dialog("close")
+                }
+            },
+            {
+                text:"删除",
+                iconCls:'icon-remove',
+                handler:function(){
+                    $.messager.confirm("删除确认","你确定要删除此药方信息吗？",function(r){
+                        if(r){
+                            medicineDelete();
+                            $("#SCMBrowerdialog").dialog("close")
+                        }
+                    });
                 }
             },
             {
@@ -25,8 +37,8 @@ $(function(){
     })
     //患者详情页面
     $("#SCMBrowerdialog").dialog({
-        width:1700,
-        height:800,
+        width:1250,
+        height:680,
         modal:true,
         closed:true,
         buttons:[
@@ -36,6 +48,18 @@ $(function(){
                 handler:function(){
                     clientModify();
                     $("#SCMBrowerdialog").dialog("close")
+                }
+            },
+            {
+                text:"删除",
+                iconCls:'icon-remove',
+                handler:function(){
+                    $.messager.confirm("删除确认","你确定要删除此患者信息吗？",function(r){
+                        if(r){
+                            clientDelete();
+                            $("#SCMBrowerdialog").dialog("close")
+                        }
+                    });
                 }
             },
             {
@@ -116,12 +140,12 @@ function clientDetailClick(cno) {
 function clientModify() {
      var SCMBrowercsymptom=$("#SCMBrowercsymptom").val();
     if(SCMBrowercsymptom.length>1300){
-        $.messager.alert('提示', '病症长度不能大于1300字');
+        $.messager.alert('提示', '病症长度不能大于1500字');
         return ;
     }
     var SCMBrowercremark = $("#SCMBrowercremark").val();
     if(SCMBrowercremark.length>1300) {
-        $.messager.alert('提示', '备注内容长度不能大于1300字');
+        $.messager.alert('提示', '药方内容长度不能大于1500字');
         return ;
     }
     $('#clientform').form({
@@ -136,4 +160,42 @@ function clientModify() {
     });
 // submit the form
     $('#clientform').submit();
+}
+function clientDelete() {
+    var SCMBrowercno=$("#SCMBrowercno").val();
+    var SCMBrowercname=$("#SCMBrowercname").val();
+    if(undefined==SCMBrowercno||SCMBrowercno==''){
+        $.messager.alert('提示', '患者编号为空，无法删除！');
+        return ;
+    }
+    $.post('../Client/DeleteClient', {
+        cno:SCMBrowercno
+    }, function(data) {
+        if(undefined ==data || data==''){
+            $.messager.alert('警告','无法删除，未查询到数据！');
+            return;
+        }
+        $.messager.alert('提示', data+"；患者姓名："+SCMBrowercname);
+        return;
+    });
+}
+function medicineDelete() {
+    var emmno = $("#emmno").val();
+    var emname = $("#emname").val();
+    if(undefined==emmno || emmno==''){
+        $.messager.alert('提示', '药单编号为空，无法删除！');
+        return ;
+    }
+    $.post(
+        '../Medicine/DeleteMedicine',{
+            mno:emmno
+        },function (data) {
+            if(undefined ==data || data==''){
+                $.messager.alert('警告','无法删除，未查询到数据！');
+                return;
+            }
+            $.messager.alert('提示', data+"；药方名称："+emname);
+            return;
+        }
+    );
 }
