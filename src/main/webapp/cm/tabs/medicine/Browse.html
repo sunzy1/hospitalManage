@@ -1,8 +1,8 @@
 <!-- /* 浏览药品信息*/ -->
 <script  type="text/javascript" src="./myjavascript/Detail.js"></script>
-<div style="margin: 0 0px 0px 0px">
+<div>
     <div class="easyui-panel" title="药方信息查询"
-         data-options="iconCls:'icon-user'" style="padding:10px 10px;text-align: center">
+         data-options="iconCls:'icon-user'" style="padding:10px 10px;text-align: left">
         <div id="clientDiv" >
             <div id="client1">
                 <label>药方编号：</label>
@@ -22,7 +22,7 @@
         </div>
     </div>
     <div style="text-align: center">
-        <a href="javascript:prescriptionQuery()" class="easyui-linkbutton" iconCls="icon-ok" style="width:100px;height: 40px;font-size: 20px">查询</a>
+        <a href="javascript:prescriptionQuery()" class="easyui-linkbutton" iconCls="icon-search" style="width:100px;height: 20px;font-size: 20px">查询</a>
     </div>
     <div align="left">
         <a href="javascript:prescriptionExport()" class="easyui-linkbutton" iconCls="icon-add" style="width:100px;height: 20px;font-size: 20px">导出</a>
@@ -40,14 +40,16 @@
             <th data-options="field:'mno',formatter:rowformater" width=10%>药方编号</th>
             <th data-options="field:'mname'" width=20% > 药方名称</th>
             <th data-options="field:'mmode'" width=5% >服用方法</th>
-            <!--<th data-options="field:'mefficacy'" width=44% height="30px">功效</th>-->
+            <th data-options="field:'mefficacy'" width=44%>详细内容</th>
+            <th data-options="field:'mremark'" width=44% >备注</th>
             <th data-options="field:'mdate'" width=10% >录入日期</th>
           </tr>
       </thead>
   </table>
 <div id="medicineDetail" class="easyui-dialog" title="药方详情页面" >
     <form id="medicineform" method="post">
-        <div>
+        <!--<div>
+            &nbsp;
             药品编号:<input readonly name="mno" id="emmno"
                        class="easyui-textbox"
                        style="width: 200px;height:40px"
@@ -65,17 +67,60 @@
                                      data-options="prompt:'请输入药方名称...'"></input>
         </div>
         <div style="margin-bottom: 30px;">
-            <!--detailedContent-->
+            &lt;!&ndash;detailedContent&ndash;&gt;
             详细内容:<textarea id="detailedContent" rows="50" cols="10" class="ckeditor" name="detailedContent">
                 </textarea>
             <input hidden name="mefficacy" id="emmefficacy"/>
         </div>
         <div style="margin-bottom: 30px">
             备注:
-            <!--diseaseContent-->
+            &lt;!&ndash;diseaseContent&ndash;&gt;
             <textarea  id="diseaseRemark" rows="50" cols="10" class="ckeditor" name="diseaseRemark">
                      </textarea>
             <input hidden name="mremark" id="emremark"/>
+        </div>-->
+        <div style="margin:30px 0px 0px 20px;font-size: 20px">
+            <table>
+                <tr style="margin-bottom: 30px;height: 60px;">
+                    <td>
+                        药品编号:<input readonly name="mno" id="emmno"
+                                    class="easyui-textbox"
+                                    style="width: 200px;height:40px"
+                                    data-options=""/>
+                        &nbsp;&nbsp;
+                    </td>
+                    <td>
+                        服用方法:<select  class="easyui-combobox" name="mmode"  id="emmmode"
+                                      data-options="panelHeight:'auto'"
+                                      style="width: 80px;height:40px">
+                        <option value="内服">内服</option>
+                        <option value="外用">外用</option>
+                    </select>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                    </td>
+                    <td>
+                        药方名称:
+                        <input  name="mname" id="emname"
+                                class="easyui-textbox"
+                                style="width: 200px;height:40px"
+                                data-options="prompt:'请输入药方名称...'"/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                    </td>
+                    <td>
+                        录入日期：<input  id="emdate" name="mdate" type="text" style="width: 200px;height:40px"></input>&nbsp;&nbsp;
+                    </td>
+                </tr>
+            </table>
+            <div style="margin-bottom: 30px;">
+                详细内容:<textarea id="detailedContent" rows="50" cols="10" class="ckeditor" name="detailedContent">
+                </textarea>
+                <input hidden name="mefficacy" id="emmefficacy"/>
+            </div>
+            <div style="margin-bottom: 30px;">
+                备注:<textarea  id="diseaseRemark" rows="50" cols="10" class="ckeditor" name="diseaseRemark">
+                     </textarea>
+                <input hidden name="mremark" id="emremark"/>
+            </div>
         </div>
     </form>
 </div>
@@ -86,6 +131,6 @@
 </div>
 <script type="text/javascript">
     function rowformater(value, row, index) {
-        return "<a href='javascript:prescriptionClick("+row.mno+")" + "' target='_self' "+ "onclick=$('#medicineDetail').dialog('open')"+" style='text-decoration:none;' hover='text-decoration:underline'>"+value+"</a>";//_top,
+        return "<a href='javascript:prescriptionClick("+'"'+row.mno+'"'+")" + "' target='_self' "+ "onclick=$('#medicineDetail').dialog('open')"+" style='text-decoration:none;' hover='text-decoration:underline'>"+value+"</a>";//_top,
     }
 </script>

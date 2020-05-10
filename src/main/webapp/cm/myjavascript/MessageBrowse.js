@@ -90,7 +90,9 @@ function clientQuery() {
 		$('#medicineid').datagrid('load',{
 			"medicineDto":JSON.stringify(medicineDto)
 		});
-	}
+        $("#medicineid").datagrid('reload');
+
+    }
 function clientExport() {
 	var SCMName=$("#SCMName").textbox('getValue');
 	var SCMDisease=$("#SCMDisease").textbox('getValue');

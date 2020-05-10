@@ -120,7 +120,7 @@ style="width:1600px;height:400px">
                 </tr>
                 <tr style="margin-bottom: 30px;height: 60px;">
                     <td>
-                        电话：<input  id="SCMBrowercphone" name="eccphone" class="easyui-textbox" style="width: 200px;height:40px" data-options="prompt:'长度小于20'"/>&nbsp;&nbsp;
+                        电话：<input  id="SCMBrowercphone" name="cphone" class="easyui-textbox" style="width: 200px;height:40px" data-options="prompt:'长度小于20'"/>&nbsp;&nbsp;
                     </td>
                     <td>
                         经办人：<select  class="easyui-combobox" id="SCMBrowerano" name="ano" style="width: 180px;height:40px"data-options="panelHeight:'auto'" >
@@ -152,10 +152,9 @@ style="width:1600px;height:400px">
 </div>
 <script type="text/javascript">
     function rowformater(value, row, index) {
-        return "<a href='javascript:clientDetailClick("+row.cno+")" + "' target='_self' "+ "onclick=$('#SCMBrowerdialog').dialog('open')"+" style='text-decoration:none;' hover='text-decoration:underline'>"+value+"</a>";//_top,
+        return "<a href='javascript:clientDetailClick("+'"'+row.cno+'"'+")" + "' target='_self' "+ " style='text-decoration:none;' hover='text-decoration:underline'>"+value+"</a>";//_top,
     }
     function getClient(c){
-      
           $.post("../Client/GetClient", {
           cno:c
         }, function(data) {

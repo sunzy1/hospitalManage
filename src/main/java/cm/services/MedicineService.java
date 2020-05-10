@@ -42,6 +42,12 @@ public class MedicineService {
 		// TODO Auto-generated method stub
 		PageHelper.startPage(page, rows);
 		List<Medicine> medicines = medicineMapper.queryAllMedicine(medicineDto);
+		if(ToolsUtils.notEmpity(medicines)){
+			for (Medicine medicine: medicines) {
+				medicine.setMefficacy(ToolsUtils.deleteJKH(medicine.getMefficacy()));
+				medicine.setMremark(ToolsUtils.deleteJKH(medicine.getMremark()));
+			}
+		}
 		PageInfo<Medicine> pageInfo = new PageInfo<Medicine>(medicines);
 		return new EasyUIResult(pageInfo.getTotal(), medicines);
 	}
@@ -94,6 +100,12 @@ public class MedicineService {
 		// TODO Auto-generated method stub
 		MedicineDto dto =new MedicineDto();
 		List<Medicine> queryAllMedicine = medicineMapper.queryAllMedicine(dto);
+		if(ToolsUtils.notEmpity(queryAllMedicine)){
+			for (Medicine medicine: queryAllMedicine) {
+				medicine.setMefficacy(ToolsUtils.deleteJKH(medicine.getMefficacy()));
+				medicine.setMremark(ToolsUtils.deleteJKH(medicine.getMremark()));
+			}
+		}
 		return queryAllMedicine;
 	}
 

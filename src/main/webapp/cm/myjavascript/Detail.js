@@ -11,7 +11,8 @@ $(function(){
                 iconCls:'icon-ok',
                 handler:function(){
                     medicineModify();
-                    $("#medicineDetail").dialog("close")
+                    $("#medicineDetail").dialog("close");
+                    prescriptionQuery();
                 }
             },
             {
@@ -21,7 +22,8 @@ $(function(){
                     $.messager.confirm("删除确认","你确定要删除此药方信息吗？",function(r){
                         if(r){
                             medicineDelete();
-                            $("#SCMBrowerdialog").dialog("close")
+                            $("#medicineDetail").dialog("close");
+                            prescriptionQuery();
                         }
                     });
                 }
@@ -30,7 +32,8 @@ $(function(){
                 text:"取消",
                 iconCls:'icon-cancel',
                 handler:function(){
-                    $("#medicineDetail").dialog("close")
+                    $("#medicineDetail").dialog("close");
+                    prescriptionQuery();
                 }
             }
         ]
@@ -47,7 +50,8 @@ $(function(){
                 iconCls:'icon-ok',
                 handler:function(){
                     clientModify();
-                    $("#SCMBrowerdialog").dialog("close")
+                    $("#SCMBrowerdialog").dialog("close");
+                    clientQuery();
                 }
             },
             {
@@ -57,7 +61,8 @@ $(function(){
                     $.messager.confirm("删除确认","你确定要删除此患者信息吗？",function(r){
                         if(r){
                             clientDelete();
-                            $("#SCMBrowerdialog").dialog("close")
+                            $("#SCMBrowerdialog").dialog("close");
+                            clientQuery();
                         }
                     });
                 }
@@ -66,7 +71,8 @@ $(function(){
                 text:"取消",
                 iconCls:'icon-cancel',
                 handler:function(){
-                    $("#SCMBrowerdialog").dialog("close")
+                    $("#SCMBrowerdialog").dialog("close");
+                    clientQuery();
                 }
             }
         ]
@@ -86,6 +92,14 @@ function prescriptionClick(mno) {
         $("#emname").val(data.mname);
         CKEDITOR.instances.diseaseRemark.setData(data.mremark);
         CKEDITOR.instances.detailedContent.setData(data.mefficacy);
+        $('#emdate').datebox({
+            required:true
+        });
+        if(null==data.mdate || undefined==data.mdate || ''==data.mdate){
+            $("#emdate").datebox('setValue',new Date().format("yyyy-MM-dd"));
+        }else{
+            $("#emdate").datebox('setValue',data.mdate);
+        }
     });
 }
 
@@ -121,16 +135,25 @@ function clientDetailClick(cno) {
         cno:cno
     }, function(data) {
         if(undefined ==data || data==''){
+            $('#SCMBrowerdialog').dialog('close');
             $.messager.alert('警告','无法查看详情，未查询到数据！');
             return;
         }
+        $('#SCMBrowerdialog').dialog('open');
         $("#SCMBrowercno").val(data.cno);
         $("#SCMBrowercname").val(data.cname);
         $("#SCMBrowercsex").val(data.csex);
         $("#SCMBrowercage").val(data.cage);
         $("#SCMBrowercphone").val(data.cphone);
         $("#SCMBrowerano").val(data.ano);
-        $("#SCMBrowercdate").val(data.cdate);
+        $('#SCMBrowercdate').datebox({
+            required:true
+        });
+        if(null==data.cdate || undefined==data.cdate || ''==data.cdate){
+            $("#SCMBrowercdate").datebox('setValue',new Date().format("yyyy-MM-dd"));
+        }else{
+            $("#SCMBrowercdate").datebox('setValue',data.cdate);
+        }
         $("#SCMBrowermno").val(data.mno);
         $("#SCMBrowercsymptom").val(data.csymptom);
         $("#SCMBrowercremark").val(data.cremark);
@@ -198,4 +221,9 @@ function medicineDelete() {
             return;
         }
     );
+}
+function getDate(strDate) {
+    var date = eval('new Date(' + strDate.replace(/\d+(?=-[^-]+$)/,
+        function (a) { return parseInt(a, 10) - 1; }).match(/\d+/g) + ')');
+    return date;
 }

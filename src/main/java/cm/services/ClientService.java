@@ -77,13 +77,13 @@ public class ClientService {
 		// TODO Auto-generated method stub
 		Client queryClientBycno = queryClientBycno(client.getCno());
 		if(null!=queryClientBycno && !StringUtils.isEmpty(queryClientBycno.getCid())){
-			/*queryClientBycno.setCaddress(client.getCaddress());
+			queryClientBycno.setCaddress(client.getCaddress());
 			queryClientBycno.setCage(client.getCage());
 			queryClientBycno.setCname(client.getCname());
 			queryClientBycno.setCphone(client.getCphone());
 			queryClientBycno.setCremark(client.getCremark());
 			queryClientBycno.setCsymptom(client.getCsymptom());
-			queryClientBycno.setCsex(client.getCsex());*/
+			queryClientBycno.setCsex(client.getCsex());
 			client.setCid(queryClientBycno.getCid());
 		}else{
 			return "修改失败，数据库无此数据无法修改";

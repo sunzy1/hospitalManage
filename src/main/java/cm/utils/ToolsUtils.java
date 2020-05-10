@@ -2,6 +2,8 @@ package cm.utils;
 
 import org.springframework.util.StringUtils;
 
+import java.util.List;
+
 public  class ToolsUtils {
     //删除尖括号内的数据，处理插件导出文本含有<div>问题
     public static String deleteJKH(String context) {
@@ -32,5 +34,11 @@ public  class ToolsUtils {
             } while (head != -1); // 如果在该段落中找不到左括号了，就终止循环
         }
         return context; // 返回更新后的context
+    }
+    public static boolean notEmpity(List list){
+        if(null!=list && list.size()>0){
+            return true;
+        }
+        return false;
     }
 }
