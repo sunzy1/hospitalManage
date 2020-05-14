@@ -6,14 +6,15 @@
         $("#emmno").val(random_date);
         $("#emmno").attr("readonly","readonly");
     });
+
 </script>
-<div style="margin:0px 0px 0px 0px">
+<div id="medicneEntry" style="margin:0px 0px 0px 0px">
     <div class="easyui-panel" title="药方信息"
     data-options="iconCls:'icon-pill_add'"
-    style="width:1400px;height:600px;">
-        <div style="margin:50px 0px 0px 100px;font-size: 20px">
+    style="width:1200px;height:600px;">
+        <div style="margin:40px 0px 0px 50px;font-size: 20px;width:1100px;">
             <form id="EMMform" method="post">
-                <div style="margin-bottom: 30px">
+                <div style="margin-bottom: 30px;">
                     药方编号:<input  name="mno" id="emmno"
                     class="easyui-textbox"
                     style="width: 200px;height:40px"
@@ -33,13 +34,13 @@
 
                 </div>
 
-                <div style="margin-bottom: 30px;">
+                <div style="margin-bottom: 30px;width: 1050px;">
                     <!--detailedContent-->
                     详细内容:<textarea id="detailedContent" rows="50" cols="10" class="ckeditor" name="detailedContent">
                 </textarea>
                     <input hidden name="mefficacy" id="emmefficacy"/>
                 </div>
-                <div style="margin-bottom: 30px">
+                <div style="margin-bottom: 30px;width: 1050px;">
                     备注:
                     <!--diseaseContent-->
                     <textarea  id="diseaseRemark" rows="50" cols="10" class="ckeditor" name="diseaseRemark">
@@ -48,10 +49,10 @@
                 </div>
             </form>
         <a
-            href="javascript:EMMclickEntry('insert')"
+            href="javascript:EMMclickEntry()"
             class="easyui-linkbutton"
             style="width: 150px;height: 40px;
-            margin-left: 35%" 
+            margin-left: 35%;margin-bottom: 100px"
             data-options="iconCls:'icon-pill_add'"><h1>录入</h1>
         </a>
         </div>

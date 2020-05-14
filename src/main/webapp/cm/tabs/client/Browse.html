@@ -17,13 +17,13 @@
     }
 </style>
 
-<div>
+<div style="width: 1200px;">
     <div class="easyui-panel" title="患者信息查询"
-         data-options="iconCls:'icon-user'" style="padding:10px 10px;text-align: center">
+         data-options="iconCls:'icon-user'" style="padding:10px 10px;text-align: center;">
         <div id="clientDiv">
             <div id="client1" style="text-align: left">
                 <div style="margin-left: 28px">
-                <label>顾客姓名：</label>
+                <label>患者姓名：</label>
                 <input id="SCMName" class="easyui-textbox"
                        style="height: 30px"
                        data-options="prompt:'请输入患者姓名...'">
@@ -59,15 +59,16 @@
         <a href="javascript:clientExport()" class="easyui-linkbutton" iconCls="icon-add" style="width:100px;height: 20px;font-size: 20px">导出</a>
     </div>
     </div>
+<div style="width: 1400px;">
      <table class="easyui-datagrid"  toolbar="#clienttoolbar"
      rownumbers="true" fitColumns="true" singleSelect="true"
      id="clientdatagrid" 
          data-options="striped:true,
          pagination:true,
 
-         url:'../Client/GetMessage?',pageSize:5,
+         url:'../Client/GetMessage?',pageSize:10,
          pageList:[2,5,10]"
-         style="width: 88%">
+         style="width: 80%">
       <thead>
           <tr>
             <th data-options="field:'cno',formatter:rowformater" width=9%>编号</th>
@@ -75,19 +76,19 @@
             <th data-options="field:'csex'" width=4%>性别</th>
              <th data-options="field:'cage'" width=3%>年龄</th>
             <!-- <th data-options="field:'caddress'" width=37%>住址</th> -->
-            <th data-options="field:'cphone'" width=8%>电话</th>
-             <th data-options="field:'csymptom'" width=21%>症状</th>
-              <th data-options="field:'cremark'" width=21%>药方信息</th>
-              <th data-options="field:'ano'" width=8%>经办人</th>
-              <th data-options="field:'cdate'" width=10%>录入日期</th>
+            <th data-options="field:'cphone'" width=10%>电话</th>
+             <th data-options="field:'csymptom'" width=26%>症状</th>
+              <th data-options="field:'cremark'" width=25%>药方信息</th>
+              <th data-options="field:'ano'" width=5%>经办人</th>
+              <th data-options="field:'cdate'" width=8%>录入日期</th>
               <!--<th data-options="field:'caddress'" width=39%>
               住址</th>-->
-              <th data-options="field:'mno'" width=12%>已购药品</th>
+              <!--<th data-options="field:'mno'" width=12%>已购药品</th>-->
 
           </tr>
       </thead>
   </table>
-
+</div>
 <!-- 隐藏页面显示顾客详情 -->
 <div class="easyui-dialog" title="患者详细信息" id="SCMBrowerdialog"
 style="width:1600px;height:400px">

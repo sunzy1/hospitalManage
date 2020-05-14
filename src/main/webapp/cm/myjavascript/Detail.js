@@ -2,7 +2,7 @@
 $(function(){
     $("#medicineDetail").dialog({
         width:1300,
-        height:680,
+        height:600,
         modal:true,
         closed:true,
         buttons:[
@@ -41,7 +41,7 @@ $(function(){
     //患者详情页面
     $("#SCMBrowerdialog").dialog({
         width:1250,
-        height:680,
+        height:600,
         modal:true,
         closed:true,
         buttons:[

@@ -2,9 +2,10 @@ package cm.dto;
 
 import cm.pojo.Medicine;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class MedicineDto extends Medicine {
+public class MedicineDto extends Medicine implements Serializable {
     private Date startDate;
     private Date endDate;
 

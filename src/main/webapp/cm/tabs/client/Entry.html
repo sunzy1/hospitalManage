@@ -8,7 +8,7 @@
     });
 </script>
 <div style="margin:10px 0px 0px 50px">
-    <div  style="width:1600px;height:600px">
+    <div  style="width:1150px;height:600px">
       <form id="ECMform" method="post" >  
         <div style="margin:30px 0px 0px 20px;font-size: 20px">
                 <table>
@@ -32,7 +32,7 @@
                         <td>
                             年龄：<input  name="cage" id="eccage"
                                        class="easyui-textbox"
-                                       style="width: 200px;height:40px"
+                                       style="width: 140px;height:40px"
                                        data-options="prompt:'长度小于4'"/>
                         </td>
                     </tr>
@@ -57,11 +57,10 @@
 
             <div style="margin-bottom: 30px;">
                 症状：<input  name="csymptom" id="eccsymptom" multiline="true" class="easyui-textbox"
-                style="width: 1000px;height:100px;font-size: 20px" data-options="prompt:'长度小于1500'" />
+                style="width: 1000px;height:150px;font-size: 20px" data-options="prompt:'长度小于1500'" />
             </div>
             <div style="margin-bottom: 30px;">
-                药方：
-                <input  name="cremark" id="eccremark" multiline="true" class="easyui-textbox"
+                药方：<input  name="cremark" id="eccremark" multiline="true" class="easyui-textbox"
                 style="width: 1000px;height:150px;font-size: 15px"  data-options="prompt:'长度小于1500'" />
             </div>
           </div>
@@ -70,63 +69,12 @@
     <a  href="javascript:ECMclickEntry()"
         class="easyui-linkbutton"
         style="width: 150px;height: 40px;
-            margin-left: 35%" 
+            margin-left: 40%" 
         data-options="iconCls:'icon-user_add'"><h1>录入</h1>
     </a>
   </div>
 </div>
 <!-- 测试完成 -->
 <script type="text/javascript">
-  function ECMclickEntry() {
-    if($("#eccname").val().length>8) {
-        $.messager.alert('提示', '姓名不能长度大于8'); 
-        return ;
-    }
-    if($("#eccphone").val().length>20) {
-        $.messager.alert('提示', '电话不能长度大于20'); 
-        return ;
-    }
-    if($("#eccage").val().length>4) {
-        $.messager.alert('提示', '年龄不能长度大于4'); 
-        return ;
-    }
-    
-    if($("#eccdate").combo("getText").length==0) {
-        $.messager.alert('提示', '日期不能为空');
-        return ;
-    }
-      /*if($("#ecano").combobox("getText").length==0) {
-          // alert($("#eccdate").combo("getText"));
-          $.messager.alert('提示', '经办人不能为空');
-          return ;
-      }
-      if($("#ecmno").combobox("getText").length==0) {
-          // alert($("#eccdate").combo("getText"));
-          $.messager.alert('提示', '已购药品不能为空');
-          return ;
-      }*/
-    
-    if($("#eccsymptom").val().length>1500) {
-        $.messager.alert('提示', '症状不能长度大于1500');
-        return ;
-    }
-     if($("#eccremark").val().length>1500) {
-        $.messager.alert('提示', '备注不能长度大于1500');
-        return ;
-    }
-              $('#ECMform').form({    
-                url:'../Client/SaveClient',    
-                onSubmit: function(){    
-                    // do some check    
-                    // return false to prevent submit;    
-                },    
-                success:function(data){    
-                    // alert("aSome");
-                    $.messager.alert('提示', data);
-                    window.parent.close("录入患者信息");
-                }    
-            });    
-            // submit the form    
-            $('#ECMform').submit();  
-}
+
 </script>

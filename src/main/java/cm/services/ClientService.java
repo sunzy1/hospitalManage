@@ -125,7 +125,7 @@ public class ClientService {
 				cellstyle.setBorderTop(HSSFCellStyle.BORDER_THIN);//上边框
 				cellstyle.setBorderRight(HSSFCellStyle.BORDER_THIN);//右边框
 				//3.填充数据
-				String[] columHeader ={"患者编号","姓名","性别","年龄","住址","联系方式","症状","备注","经办人","录入日期","已购药品"};
+				String[] columHeader ={"患者编号","姓名","性别","年龄","住址","联系方式","症状","备注","经办人","录入日期"};
 				List<String> columHeaderlist = Arrays.asList(columHeader);
 				int rowNum=0;
 				//设置表主标题
@@ -143,7 +143,6 @@ public class ClientService {
 				sheets.setColumnWidth( 7,10000);
 				sheets.setColumnWidth( 8,2000);
 				sheets.setColumnWidth( 9,4000);
-				sheets.setColumnWidth( 10,4000);
 				for(Client client :clientList){
 					HSSFRow rows =sheets.createRow(rowNum);
 					HSSFCell cell0= rows.createCell(0);
@@ -156,7 +155,6 @@ public class ClientService {
 					HSSFCell cell7= rows.createCell(7);
 					HSSFCell cell8= rows.createCell(8);
 					HSSFCell cell9= rows.createCell(9);
-					HSSFCell cell10= rows.createCell(10);
 //"患者编号","姓名","性别","年龄","住址","联系方式","症状","备注","经办人","录入日期","已购药品"};
 					cell0.setCellValue(client.getCno());
 					cell1.setCellValue(client.getCname());
@@ -169,7 +167,6 @@ public class ClientService {
 					cell8.setCellValue(client.getAno());
 					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 					cell9.setCellValue(client.getCdate()!=null?sdf.format(client.getCdate()):"");
-					cell10.setCellValue(client.getMno());
 					rowNum++;
 				}
 				exportExcelUtils.setRegionStyle(sheets,new CellRangeAddress(1,rowNum-1,0,columHeader.length-1),cellstyle);

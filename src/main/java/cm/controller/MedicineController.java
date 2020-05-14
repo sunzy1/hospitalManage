@@ -1,5 +1,8 @@
 package cm.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -8,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import cm.dto.ClientDto;
 import cm.dto.MedicineDto;
+import cm.dto.MedicineExportDto;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -112,10 +116,27 @@ public class MedicineController {
 		List<Medicine> allMedicine = medicineService.getAllMedicine();
 		return allMedicine;
 	}
-	// 修改药品信息
+	// 修改药品信息, produces = "text/html;charset=UTF-8"
 	@RequestMapping(value = "exportMedicine", produces = "text/html;charset=UTF-8")
-	public void exportMedicine(String data, HttpServletResponse response) {
-		MedicineDto medicineDto= JSONObject.parseObject(data,MedicineDto.class);
-		 medicineService.exportMedicine(medicineDto,response);
+	public void exportMedicine(MedicineExportDto medicineExportDto, HttpServletRequest request, HttpServletResponse response) {
+		MedicineDto medicineDto=new MedicineDto();
+		if(null!=medicineExportDto){
+			try{
+				SimpleDateFormat sdf =new SimpleDateFormat("yyyy-MM-dd");
+				if(!StringUtils.isEmpty(medicineExportDto.getStartDate())){
+					Date startDate = sdf.parse(medicineExportDto.getStartDate());
+					medicineDto.setStartDate(startDate);
+				}
+				if(!StringUtils.isEmpty(medicineExportDto.getEndDate())){
+					Date endDate = sdf.parse(medicineExportDto.getEndDate());
+					medicineDto.setEndDate(endDate);
+				}
+			}catch (ParseException e){
+				e.printStackTrace();
+			}
+			medicineDto.setMno(medicineExportDto.getMno());
+			medicineDto.setMname(medicineExportDto.getMname());
+		}
+		medicineService.exportMedicine(medicineDto,response);
 	}
 }

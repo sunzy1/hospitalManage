@@ -1,6 +1,8 @@
 package cm.controller;
 
 import cm.dto.ClientDto;
+import cm.dto.ClientExportDto;
+import cm.dto.MedicineDto;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,9 @@ import cm.services.ClientService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @RequestMapping("Client")
 @Controller
@@ -95,8 +100,27 @@ public class ClientController {
 	}
 	// 修改客户信息
 	@RequestMapping(value = "exportClient", produces = "text/html;charset=UTF-8")
-	public void exportClient(String data,HttpServletResponse response) {
-        ClientDto dto=JSONObject.parseObject(data,ClientDto.class);
+	public void exportClient(ClientExportDto clientExportDto, HttpServletResponse response) {
+		ClientDto dto=new ClientDto();
+		if(null!=clientExportDto){
+			try{
+				SimpleDateFormat sdf =new SimpleDateFormat("yyyy-MM-dd");
+				if(!StringUtils.isEmpty(clientExportDto.getStartDate())){
+					Date startDate = sdf.parse(clientExportDto.getStartDate());
+					dto.setStartDate(startDate);
+				}
+				if(!StringUtils.isEmpty(clientExportDto.getEndDate())){
+					Date endDate = sdf.parse(clientExportDto.getEndDate());
+					dto.setEndDate(endDate);
+				}
+			}catch (ParseException e){
+				e.printStackTrace();
+			}
+			dto.setMno(clientExportDto.getCno());
+			dto.setCname(clientExportDto.getCname());
+			dto.setCsymptom(clientExportDto.getCsymptom());
+			dto.setCremark(clientExportDto.getCremark());
+		}
         clientService.exportClient(dto,response);
 	}
 }

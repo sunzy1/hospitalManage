@@ -28,24 +28,26 @@
         <a href="javascript:prescriptionExport()" class="easyui-linkbutton" iconCls="icon-add" style="width:100px;height: 20px;font-size: 20px">导出</a>
     </div>
 </div>
+<div style="width: 1400px;">
      <table class="easyui-datagrid"
             id="medicineid"
             data-options="striped:true,
          pagination:true,
-         url:'../Medicine/GetMessage',pageSize:5,
+         url:'../Medicine/GetMessage',pageSize:10,
          pageList:[2,5,10]"
-         style="width: 88%;">
+         style="width: 80%;">
       <thead>
           <tr>
             <th data-options="field:'mno',formatter:rowformater" width=10%>药方编号</th>
             <th data-options="field:'mname'" width=20% > 药方名称</th>
-            <th data-options="field:'mmode'" width=5% >服用方法</th>
-            <th data-options="field:'mefficacy'" width=44%>详细内容</th>
-            <th data-options="field:'mremark'" width=44% >备注</th>
+            <th data-options="field:'mmode'" width=6% >服用方法</th>
+            <th data-options="field:'mefficacy'" width=50%>详细内容</th>
+           <!-- <th data-options="field:'mremark'" width=44% >备注</th>-->
             <th data-options="field:'mdate'" width=10% >录入日期</th>
           </tr>
       </thead>
   </table>
+</div>
 <div id="medicineDetail" class="easyui-dialog" title="药方详情页面" >
     <form id="medicineform" method="post">
         <!--<div>
