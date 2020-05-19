@@ -36,6 +36,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="null!=endDate">
 			and cdate  &lt;= #{endDate,jdbcType=TIMESTAMP}
 		</if>
+		 order by cdate desc
 	</select>
 	<select id="saveClient" parameterType="Client" >
 		INSERT INTO client (

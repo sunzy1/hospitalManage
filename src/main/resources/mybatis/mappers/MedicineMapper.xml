@@ -18,7 +18,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="mmode!=''">
           and mmode = #{mmode} 
         </if>
-        
+        order by mdate desc
 	</select>
 	<update id="modifyMedicine"  parameterType="cm.dto.MedicineDto">
 		update medicine set mno=#{mno},mname=#{mname},mmode=#{mmode},
@@ -41,6 +41,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="null!=endDate">
 			and mdate  &lt; #{endDate,jdbcType=TIMESTAMP}
 		</if>
+		order by mdate desc
 	</select>
 	<insert id="saveMedicine" parameterType="cm.dto.MedicineDto">
 		insert into medicine(mno,mname,mmode,mefficacy,mremark,mdate) VALUES
